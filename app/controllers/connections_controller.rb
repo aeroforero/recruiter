@@ -1,6 +1,6 @@
 class ConnectionsController < ApplicationController
   def index
-    @connections = Connection.all
+    @connections = Connection.all.sort_by{|e| e[:first_name]}
 
     render("connections/index.html.erb")
   end

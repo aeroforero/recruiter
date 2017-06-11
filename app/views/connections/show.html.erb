@@ -1,46 +1,68 @@
-<div class="page-header">
-  <h3>Connection #<%= @connection.id %></h3>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 pt-2">
+    <div class="jumbotron">
+      <h1>
+        <%= @connection.first_name %> <%= @connection.last_name %>
+        <small>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary btn-xs">
+              <a href="/connections/<%= @connection.id %>/edit">edit</a> </button>
+          </div>
+        </small>
+      </h1>
+      <h5>  <i class="fa fa-building" aria-hidden="true"></i> <%= @connection.company %>
+      </h5>
+      <h5> <i class="fa fa-envelope" aria-hidden="true"></i> <%= @connection.email %>
+      </h5>
+      <h5>  <i class="fa fa-phone" aria-hidden="true"></i> <%= @connection.phone %>
+      </h5>
+      <h5>  <i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @connection.birthdate %>
+      </h5>
+      <% if @connection.linkedin != nil %>
+      <h5>  <i class="fa fa-linkedin-square" aria-hidden="true"></i> <%= @connection.linkedin %>
+      </h5>
+      <% else %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
+
 <div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>First name</dt>
-      <dd><%= @connection.first_name %></dd>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Conversation History
+        </h3>
+      </div>
+      <div class="panel-body">
+        <!-- #body content -->
+        <ul class="media-list">
+          <!-- comments -->
+          <% @connection.conversations.each do |convo| %>
 
-      <dt>Last name</dt>
-      <dd><%= @connection.last_name %></dd>
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <%= convo.location %>
+                <small>
+                  <%= time_ago_in_words(convo.created_at) %>
+                </small>
+              </h6>
+              <p><strong>
+                <%= convo.summary %>
+              </strong></p>
+              <p> <%= convo.full_detail %>
+              </p>
+            </div>
+            <% end %>
+          </li>
+        </ul>
 
-      <dt>Company</dt>
-      <dd><%= @connection.company %></dd>
 
-      <dt>Phone</dt>
-      <dd><%= @connection.phone %></dd>
-
-      <dt>Email</dt>
-      <dd><%= @connection.email %></dd>
-
-      <dt>Birthdate</dt>
-      <dd><%= @connection.birthdate %></dd>
-
-      <dt>Linkedin</dt>
-      <dd><%= @connection.linkedin %></dd>
-
-      <dt>User</dt>
-      <dd><%= @connection.user_id %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/connections" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/connections/<%= @connection.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_connection/<%= @connection.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+        <!-- #end of body content -->
+      </div>
     </div>
   </div>
 </div>
