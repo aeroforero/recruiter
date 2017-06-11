@@ -82,13 +82,14 @@
       </div>
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
+      <input name="user_id" type="hidden" value="<%= current_user.id %>" >
+      <!-- <div class="form-group">
         <label for="user_id" class="control-label">
           User
         </label>
 
         <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @connection.user_id %>">
-      </div>
+      </div> -->
 
       <button class="btn btn-success">
         Create Connection
