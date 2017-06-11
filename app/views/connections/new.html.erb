@@ -1,0 +1,100 @@
+<!-- Validation failure messages -->
+<% if @connection.errors.any? %>
+  <% @connection.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Connection</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_connection" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for first_name -->
+      <div class="form-group">
+        <label for="first_name" class="control-label">
+          First name
+        </label>
+
+        <input type="text" id="first_name" name="first_name" placeholder="First name" class="form-control" value="<%= @connection.first_name %>">
+      </div>
+
+      <!-- Label and input for last_name -->
+      <div class="form-group">
+        <label for="last_name" class="control-label">
+          Last name
+        </label>
+
+        <input type="text" id="last_name" name="last_name" placeholder="Last name" class="form-control" value="<%= @connection.last_name %>">
+      </div>
+
+      <!-- Label and input for company -->
+      <div class="form-group">
+        <label for="company" class="control-label">
+          Company
+        </label>
+
+        <input type="text" id="company" name="company" placeholder="Company" class="form-control" value="<%= @connection.company %>">
+      </div>
+
+      <!-- Label and input for phone -->
+      <div class="form-group">
+        <label for="phone" class="control-label">
+          Phone
+        </label>
+
+        <input type="text" id="phone" name="phone" placeholder="Phone" class="form-control" value="<%= @connection.phone %>">
+      </div>
+
+      <!-- Label and input for email -->
+      <div class="form-group">
+        <label for="email" class="control-label">
+          Email
+        </label>
+
+        <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<%= @connection.email %>">
+      </div>
+
+      <!-- Label and input for birthdate -->
+      <div class="form-group">
+        <label for="birthdate" class="control-label">
+          Birthdate
+        </label>
+
+        <input type="text" id="birthdate" name="birthdate" placeholder="Birthdate" class="form-control" value="<%= @connection.birthdate %>">
+      </div>
+
+      <!-- Label and input for linkedin -->
+      <div class="form-group">
+        <label for="linkedin" class="control-label">
+          Linkedin
+        </label>
+
+        <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" class="form-control" value="<%= @connection.linkedin %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @connection.user_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Connection
+      </button>
+      or
+      <a href="/connections">Cancel</a>
+    </form>
+  </div>
+</div>
