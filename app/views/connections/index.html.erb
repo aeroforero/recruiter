@@ -12,6 +12,7 @@
 
 <div class="row">
   <% @connections.each do |connection| %>
+  <% if current_user.id == connection.user_id %>
   <div class="col-sm-6 col-md-4">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -46,8 +47,13 @@
       </div>
     </div>
   </div>
+  <%else %>
+
+  <%end %>
   <%end %>
 </div>
+
+
 <!-- <div class="container">
 <div class="row">
 <% @connections.each do |connection| %>

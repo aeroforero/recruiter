@@ -8,10 +8,10 @@ class User < ApplicationRecord
 has_many :connections, :dependent => :destroy
 
 # validations
-# validates :phone, :presence => true
-# validates :phone, :uniqueness => true
-# validates :last_name, :presence => true
-# validates :first_name, :presence => true
-# validates :birthday, :presence => true
+validates :phone, :presence => true
+validates :phone, :uniqueness => true
+validates :last_name, :presence => true
+validates :first_name, :presence => true
+validates :birthday, :presence => true
 
 end
