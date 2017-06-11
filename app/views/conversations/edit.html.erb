@@ -55,15 +55,17 @@
       </div>
 
       <!-- Label and input for connections_id -->
+      <input name="connections_id" type="hidden" value="<%= @conversation.connections_id %>">
+      <!--
       <div class="form-group">
         <label for="connections_id" class="control-label">
           Connections
         </label>
 
         <input type="text" id="connections_id" name="connections_id" placeholder="Connections" class="form-control" value="<%= @conversation.connections_id %>">
-      </div>
+      </div> -->
 
-      <button class="btn btn-warning">
+      <button class="btn btn-primary">
         Update Conversation
       </button>
       or

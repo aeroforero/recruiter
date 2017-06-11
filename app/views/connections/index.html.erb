@@ -21,11 +21,12 @@
             <span class="span1 offset2"></span>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+            <li><a href="/connections/<%= connection.id %>">Details</a></li>
             <li>
               <a href="/connections/<%= connection.id %>/edit">Edit</a>
             </li>
 
-            <li><a href="#">Add Conversation</a></li>
             <li role="separator" class="divider"></li>
             <li>
               <a href="/delete_connection/<%= connection.id %>">Delete</a>

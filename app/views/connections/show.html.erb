@@ -7,27 +7,30 @@
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary btn-xs">
               <a href="/connections/<%= @connection.id %>/edit">edit</a> </button>
-          </div>
-        </small>
-      </h1>
-      <h5>  <i class="fa fa-building" aria-hidden="true"></i> <%= @connection.company %>
-      </h5>
-      <h5> <i class="fa fa-envelope" aria-hidden="true"></i> <%= @connection.email %>
-      </h5>
-      <h5>  <i class="fa fa-phone" aria-hidden="true"></i> <%= @connection.phone %>
-      </h5>
-      <h5>  <i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @connection.birthdate %>
-      </h5>
-      <% if @connection.linkedin != nil %>
-      <h5>  <i class="fa fa-linkedin-square" aria-hidden="true"></i> <%= @connection.linkedin %>
-      </h5>
-      <% else %>
-      <% end %>
+            </div>
+          </small>
+        </h1>
+        <h5>  <i class="fa fa-building" aria-hidden="true"></i> <%= @connection.company %>
+        </h5>
+        <h5> <i class="fa fa-envelope" aria-hidden="true"></i> <%= @connection.email %>
+        </h5>
+        <h5>  <i class="fa fa-phone" aria-hidden="true"></i> <%= @connection.phone %>
+        </h5>
+        <h5>  <i class="fa fa-birthday-cake" aria-hidden="true"></i> <%= @connection.birthdate %>
+        </h5>
+        <% if @connection.linkedin != nil %>
+        <h5>  <i class="fa fa-linkedin-square" aria-hidden="true"></i> <%= @connection.linkedin %>
+        </h5>
+        <% else %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
+<% if @connection.conversations.count == 0 %>
 
+<% else %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
@@ -40,14 +43,15 @@
         <!-- #body content -->
         <ul class="media-list">
           <!-- comments -->
-          <% @connection.conversations.each do |convo| %>
+          <% @connection.conversations.sort_by{|e| e[:date]}.reverse.each do |convo| %>
 
           <li class="media">
             <div class="media-body">
               <h6 class="media-heading">
                 <%= convo.location %>
                 <small>
-                  <%= time_ago_in_words(convo.created_at) %>
+                  <%= time_ago_in_words(convo.date) %>
+                  <a href="/conversations/<%= convo.id %>/edit"> <i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="/delete_conversation/<%= convo.id %>"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                 </small>
               </h6>
               <p><strong>
@@ -56,9 +60,81 @@
               <p> <%= convo.full_detail %>
               </p>
             </div>
-            <% end %>
           </li>
+          <% end %>
         </ul>
+
+
+
+        <!-- #end of body content -->
+      </div>
+    </div>
+  </div>
+</div>
+<%end %>
+
+<!-- form to add a new connection -->
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Add Conversation
+        </h3>
+      </div>
+      <div class="panel-body">
+        <% @conversation = Conversation.new %>
+        <!-- #body content -->
+        <form action="/create_conversation" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for date -->
+          <div class="form-group">
+            <label for="date" class="control-label">
+              Date
+            </label>
+
+            <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @conversation.date %>">
+          </div>
+
+          <!-- Label and input for summary -->
+          <div class="form-group">
+            <label for="summary" class="control-label">
+              Summary
+            </label>
+
+            <textarea id="summary" name="summary" placeholder="Summary" class="form-control" rows="3"><%= @conversation.summary %></textarea>
+          </div>
+
+          <!-- Label and input for full_detail -->
+          <div class="form-group">
+            <label for="full_detail" class="control-label">
+              Full detail
+            </label>
+
+            <textarea id="full_detail" name="full_detail" placeholder="Full detail" class="form-control" rows="3"><%= @conversation.full_detail %></textarea>
+          </div>
+
+          <!-- Label and input for location -->
+          <div class="form-group">
+            <label for="location" class="control-label">
+              Location
+            </label>
+
+            <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @conversation.location %>">
+          </div>
+
+          <!-- Label and input for connections_id -->
+          <input name="connections_id" type="hidden" value="<%= @connection.id %>"
+
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">
+              Add Conversation
+            </button>
+          </div>
+        </form>
 
 
         <!-- #end of body content -->

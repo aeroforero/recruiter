@@ -29,7 +29,7 @@ class ConversationsController < ApplicationController
     save_status = @conversation.save
 
     if save_status == true
-      redirect_to("/conversations/#{@conversation.id}", :notice => "Conversation created successfully.")
+      redirect_to("/connections/#{@conversation.connections_id}", :notice => "Conversation created successfully.")
     else
       render("conversations/new.html.erb")
     end

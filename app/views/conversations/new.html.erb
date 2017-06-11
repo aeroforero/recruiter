@@ -1,73 +1,80 @@
 <!-- Validation failure messages -->
 <% if @conversation.errors.any? %>
-  <% @conversation.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @conversation.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
-<div class="page-header">
-  <h3>Add Conversation</h3>
-</div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <form action="/create_conversation" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for date -->
-      <div class="form-group">
-        <label for="date" class="control-label">
-          Date
-        </label>
-
-        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @conversation.date %>">
+  <div class="col-md-8 col-md-offset-2 pt-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Add Conversation
+        </h3>
       </div>
 
-      <!-- Label and input for summary -->
-      <div class="form-group">
-        <label for="summary" class="control-label">
-          Summary
-        </label>
+      <div class="panel-body">
+        <form action="/create_conversation" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-        <textarea id="summary" name="summary" placeholder="Summary" class="form-control" rows="3"><%= @conversation.summary %></textarea>
+          <!-- Label and input for date -->
+          <div class="form-group">
+            <label for="date" class="control-label">
+              Date
+            </label>
+
+            <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @conversation.date %>">
+          </div>
+
+          <!-- Label and input for summary -->
+          <div class="form-group">
+            <label for="summary" class="control-label">
+              Summary
+            </label>
+
+            <textarea id="summary" name="summary" placeholder="Summary" class="form-control" rows="3"><%= @conversation.summary %></textarea>
+          </div>
+
+          <!-- Label and input for full_detail -->
+          <div class="form-group">
+            <label for="full_detail" class="control-label">
+              Full detail
+            </label>
+
+            <textarea id="full_detail" name="full_detail" placeholder="Full detail" class="form-control" rows="3"><%= @conversation.full_detail %></textarea>
+          </div>
+
+          <!-- Label and input for location -->
+          <div class="form-group">
+            <label for="location" class="control-label">
+              Location
+            </label>
+
+            <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @conversation.location %>">
+          </div>
+
+          <!-- Label and input for connections_id -->
+          <input name="connections_id" type="hidden" value="<%= @conversation.connections_id %>"
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">
+              Add Conversation
+            </button>
+          </div>
+
+          <div class="form-group">
+            <a href="/conversations/" class="btn btn-link btn-block">
+              Cancel
+            </a>
+          </div>
+        </form>
       </div>
-
-      <!-- Label and input for full_detail -->
-      <div class="form-group">
-        <label for="full_detail" class="control-label">
-          Full detail
-        </label>
-
-        <textarea id="full_detail" name="full_detail" placeholder="Full detail" class="form-control" rows="3"><%= @conversation.full_detail %></textarea>
-      </div>
-
-      <!-- Label and input for location -->
-      <div class="form-group">
-        <label for="location" class="control-label">
-          Location
-        </label>
-
-        <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @conversation.location %>">
-      </div>
-
-      <!-- Label and input for connections_id -->
-      <div class="form-group">
-        <label for="connections_id" class="control-label">
-          Connections
-        </label>
-
-        <input type="text" id="connections_id" name="connections_id" placeholder="Connections" class="form-control" value="<%= @conversation.connections_id %>">
-      </div>
-
-      <button class="btn btn-success">
-        Create Conversation
-      </button>
-      or
-      <a href="/conversations">Cancel</a>
-    </form>
+    </div>
   </div>
 </div>
